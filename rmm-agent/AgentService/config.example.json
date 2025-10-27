@@ -1,0 +1,7 @@
+{
+  "ServerUrl": "https://your-cloud-rmm.example.com",
+  "AgentId": "AGENT-0001",
+  "ApiKey": "replace-with-api-key",
+  "HeartbeatIntervalSeconds": 60,
+  "CollectProcesses": false
+}
