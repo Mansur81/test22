@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+  <Product Id="*"
+           Name="Cloud RMM Agent"
+           Language="1033"
+           Version="1.0.0.0"
+           Manufacturer="Example Corp"
+           UpgradeCode="1E3CFB0C-45D7-4BF6-8D87-E61F90C12216">
+    <Package InstallerVersion="500"
+             Compressed="yes"
+             InstallScope="perMachine"
+             Description="Cloud RMM Windows Agent" />
+
+    <MajorUpgrade Schedule="afterInstallInitialize" DowngradeErrorMessage="A newer version of the Cloud RMM Agent is already installed." />
+    <MediaTemplate EmbedCab="yes" />
+
+    <Feature Id="MainFeature" Title="Cloud RMM Agent" Level="1">
+      <ComponentGroupRef Id="AgentComponents" />
+    </Feature>
+  </Product>
+
+  <Fragment>
+    <Directory Id="TARGETDIR" Name="SourceDir">
+      <Directory Id="ProgramFiles64Folder">
+        <Directory Id="INSTALLFOLDER" Name="Cloud RMM Agent" />
+      </Directory>
+    </Directory>
+  </Fragment>
+
+  <Fragment>
+    <ComponentGroup Id="AgentComponents">
+      <Component Id="cmpAgentExecutable" Guid="D76CD7F6-91B1-4A4D-B075-F7D4D4C2A8E9">
+        <File Id="filAgentExecutable"
+              KeyPath="yes"
+              Source="$(var.PublishFolder)\\CloudRmmAgent.exe"
+              Checksum="yes">
+          <ServiceInstall Id="svcInstall"
+                           Name="CloudRmmAgent"
+                           DisplayName="Cloud RMM Agent"
+                           Description="Reports device health to the Cloud RMM platform"
+                           Start="auto"
+                           Type="ownProcess"
+                           ErrorControl="normal"
+                           Vital="yes"
+                           Account="LocalSystem" />
+          <ServiceControl Id="svcControl"
+                           Name="CloudRmmAgent"
+                           Start="install"
+                           Stop="both"
+                           Remove="uninstall"
+                           Wait="yes" />
+        </File>
+      </Component>
+
+      <Component Id="cmpAppSettings" Guid="E927AD18-CF82-4E69-99C7-5F90CB12AFB3">
+        <File Id="filAppSettings"
+              Source="$(var.PublishFolder)\\appsettings.json"
+              KeyPath="yes" />
+      </Component>
+
+      <Component Id="cmpConfigTemplate" Guid="83D86E3F-6BA5-41C0-BAC6-6CD64A63A323">
+        <File Id="filConfigTemplate"
+              Source="$(var.PublishFolder)\\config.example.json"
+              KeyPath="yes" />
+      </Component>
+    </ComponentGroup>
+  </Fragment>
+</Wix>
