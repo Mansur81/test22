@@ -1,7 +1,70 @@
+:root {
+  color-scheme: dark;
+  font-family: Arial, sans-serif;
+}
+
 body {
-    background-color: green
-    
+  margin: 0;
+  background: #0f172a;
+  color: #e2e8f0;
+}
 
+.app {
+  max-width: 860px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
 
+.subtitle {
+  color: #94a3b8;
+}
 
+.card {
+  background: #111827;
+  border: 1px solid #1f2937;
+  border-radius: 12px;
+  padding: 1rem;
+  margin-top: 1rem;
+}
+
+textarea,
+input {
+  width: 100%;
+  margin-top: 0.4rem;
+  margin-bottom: 0.75rem;
+  padding: 0.6rem;
+  border-radius: 8px;
+  border: 1px solid #334155;
+  background: #0b1220;
+  color: #f8fafc;
+}
+
+.controls {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.75rem;
+}
+
+button {
+  background: #2563eb;
+  color: #fff;
+  border: 0;
+  border-radius: 10px;
+  padding: 0.7rem 1rem;
+  cursor: pointer;
+}
+
+#message {
+  margin-top: 0.8rem;
+  color: #cbd5e1;
+}
+
+.buy { color: #22c55e; }
+.sell { color: #ef4444; }
+.hold { color: #f59e0b; }
+
+@media (max-width: 700px) {
+  .controls {
+    grid-template-columns: 1fr;
+  }
 }
